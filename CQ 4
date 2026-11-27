@@ -1,0 +1,69 @@
+import java.util.*;
+
+class Vehicle {
+    double dailyRate;
+
+    Vehicle(double rate) {
+        dailyRate = rate;
+    }
+
+    double calculateRentalCharge(int days) {
+        return dailyRate * days;
+    }
+
+    String getVehicleType() {
+        return "";
+    }
+}
+
+class Car extends Vehicle {
+    Car() {
+        super(1500.0);
+    }
+
+    String getVehicleType() {
+        return "Car";
+    }
+}
+
+class Bike extends Vehicle {
+    Bike() {
+        super(600.0);
+    }
+
+    String getVehicleType() {
+        return "Bike";
+    }
+}
+
+class Truck extends Vehicle {
+    Truck() {
+        super(3000.0);
+    }
+
+    String getVehicleType() {
+        return "Truck";
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int type = sc.nextInt();
+        int days = sc.nextInt();
+
+        Vehicle v;
+
+        if (type == 1)
+            v = new Car();
+        else if (type == 2)
+            v = new Bike();
+        else
+            v = new Truck();
+
+        System.out.println("Vehicle Type: " + v.getVehicleType());
+        System.out.printf("Rental Charge: %.2f",
+                v.calculateRentalCharge(days));
+    }
+}
