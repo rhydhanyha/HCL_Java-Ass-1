@@ -1,0 +1,51 @@
+import java.util.*;
+
+class Delivery {
+    double orderAmount;
+
+    Delivery(double amount) {
+        orderAmount = amount;
+    }
+
+    double calculateDeliveryCharge() {
+        return orderAmount;
+    }
+}
+
+class RegularDelivery extends Delivery {
+    RegularDelivery(double amount) {
+        super(amount);
+    }
+
+    double calculateDeliveryCharge() {
+        return orderAmount + 40;
+    }
+}
+
+class ExpressDelivery extends Delivery {
+    ExpressDelivery(double amount) {
+        super(amount);
+    }
+
+    double calculateDeliveryCharge() {
+        return orderAmount + 80 + (orderAmount * 5 / 100);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int type = sc.nextInt();
+        double amount = sc.nextDouble();
+
+        Delivery d;
+
+        if (type == 1)
+            d = new RegularDelivery(amount);
+        else
+            d = new ExpressDelivery(amount);
+
+        System.out.printf("%.2f", d.calculateDeliveryCharge());
+    }
+}
