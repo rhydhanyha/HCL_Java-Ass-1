@@ -1,0 +1,74 @@
+import java.util.*;
+
+abstract class Doctor {
+    double consultationCharge;
+
+    Doctor(double charge) {
+        consultationCharge = charge;
+    }
+
+    abstract String getDoctorType();
+
+    double calculateTotalBill(double testCharges) {
+        return consultationCharge;
+    }
+}
+
+class GeneralPhysician extends Doctor {
+    GeneralPhysician() {
+        super(500);
+    }
+
+    String getDoctorType() {
+        return "General Physician";
+    }
+}
+
+class Specialist extends Doctor {
+    Specialist() {
+        super(1000);
+    }
+
+    String getDoctorType() {
+        return "Specialist";
+    }
+}
+
+class EmergencyDoctor extends Doctor {
+    EmergencyDoctor() {
+        super(1500);
+    }
+
+    String getDoctorType() {
+        return "Emergency Doctor";
+    }
+
+    double calculateTotalBill(double testCharges) {
+        return consultationCharge + testCharges;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int type = sc.nextInt();
+        double test = sc.nextDouble();
+
+        Doctor d;
+
+        if (type == 1)
+            d = new GeneralPhysician();
+        else if (type == 2)
+            d = new Specialist();
+        else
+            d = new EmergencyDoctor();
+
+        System.out.println("Doctor Type: " + d.getDoctorType());
+        System.out.printf("Consultation Charge: %.2f%n",
+                d.consultationCharge);
+        System.out.printf("Test Charges: %.2f%n", test);
+        System.out.printf("Total Bill: %.2f",
+                d.calculateTotalBill(test));
+    }
+}
