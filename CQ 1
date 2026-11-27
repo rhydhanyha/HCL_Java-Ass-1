@@ -1,0 +1,54 @@
+import java.util.*;
+abstract class Employee {
+    private int employeeId;
+    private String employeeName;
+    Employee(int id, String name) {
+        employeeId = id;
+        employeeName = name;
+    }
+    int getEmployeeId() {
+        return employeeId;
+    }
+    String getEmployeeName() {
+        return employeeName;
+    }
+    abstract double calculateSalary();
+}
+class FullTimeEmployee extends Employee {
+    double monthlySalary;
+    FullTimeEmployee(int id, String name, double salary) {
+        super(id, name);
+        monthlySalary = salary;
+    }
+    double calculateSalary() {
+        return monthlySalary;
+    }
+}
+class ContractEmployee extends Employee {
+    int workingDays;
+    double dailyRate;
+    ContractEmployee(int id, String name, int days, double rate) {
+        super(id, name);
+        workingDays = days;
+        dailyRate = rate;
+    }
+    double calculateSalary() {
+        return workingDays * dailyRate;
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int type = sc.nextInt();
+        int id = sc.nextInt();
+        String name = sc.next();
+        Employee e;
+        if (type == 1)
+            e = new FullTimeEmployee(id, name, sc.nextDouble());
+        else
+            e = new ContractEmployee(id, name, sc.nextInt(), sc.nextDouble());
+        System.out.println("Employee ID: " + e.getEmployeeId());
+        System.out.println("Employee Name: " + e.getEmployeeName());
+        System.out.printf("Salary: %.2f", e.calculateSalary());
+    }
+}
