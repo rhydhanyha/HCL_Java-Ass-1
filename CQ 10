@@ -1,0 +1,73 @@
+import java.util.*;
+
+class Product {
+    int productId;
+    String productName;
+    double price;
+
+    Product(int id, String name, double price) {
+        productId = id;
+        productName = name;
+        this.price = price;
+    }
+
+    double calculateDiscount() {
+        return 0;
+    }
+}
+
+class ElectronicsProduct extends Product {
+    ElectronicsProduct(int id, String name, double price) {
+        super(id, name, price);
+    }
+
+    double calculateDiscount() {
+        return price * 12 / 100;
+    }
+}
+
+class ClothingProduct extends Product {
+    ClothingProduct(int id, String name, double price) {
+        super(id, name, price);
+    }
+
+    double calculateDiscount() {
+        return price * 20 / 100;
+    }
+}
+
+class GroceryProduct extends Product {
+    GroceryProduct(int id, String name, double price) {
+        super(id, name, price);
+    }
+
+    double calculateDiscount() {
+        return price * 5 / 100;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int type = sc.nextInt();
+        int id = sc.nextInt();
+        String name = sc.next();
+        double price = sc.nextDouble();
+
+        Product p;
+
+        if (type == 1)
+            p = new ElectronicsProduct(id, name, price);
+        else if (type == 2)
+            p = new ClothingProduct(id, name, price);
+        else
+            p = new GroceryProduct(id, name, price);
+
+        System.out.println("Product ID: " + p.productId);
+        System.out.println("Product Name: " + p.productName);
+        System.out.printf("Discount: %.2f%n", p.calculateDiscount());
+        System.out.printf("Final Price: %.2f",
+                price - p.calculateDiscount());
+    }
+}
